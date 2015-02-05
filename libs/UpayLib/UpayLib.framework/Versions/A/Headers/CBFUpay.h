@@ -10,7 +10,7 @@
 
     #define _WOSAI_UPAY_
 
-#define UPAY_LIB_VERSION @"0.8.0"
+#define UPAY_LIB_VERSION @"0.8.1"
 
     #import "CBFUpayTask.h"
 
