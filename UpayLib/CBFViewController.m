@@ -57,10 +57,13 @@
 #pragma mark - action
 
 - (void)upayTest:(id)sender {
-    CBFUpayTask *task = [[CBFUpayTask alloc] init];
+    self.orderInfo.payMethod = @(1);
     self.orderInfo.executeType = @(CBFUpayOrderInfoExecuteTypeCheckout);
-    self.orderInfo.payMethod = nil;
-    [task setOrderInfo:self.orderInfo];
+    CBFUpayTask *task = [[CBFUpayTask alloc] initWithOrderInfo:self.orderInfo success:^(CBFUpayResult *responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
     [task executeInViewController:self];
 }
 
@@ -83,7 +86,7 @@
     }
     _orderInfo.orderId = self.view.orderIdTextField.text;
     _orderInfo.operId = self.view.operIdTextField.text;
-    _orderInfo.transactionId = self.view.transactionIdTextField.text;
+    _orderInfo.transactionId = nil;
     _orderInfo.batchNo = self.view.batchNoTextField.text;
     _orderInfo.voucherNo = self.view.voucherNoTextField.text;
     _orderInfo.subject = self.view.subjectTextField.text;
